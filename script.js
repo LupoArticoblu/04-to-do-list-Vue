@@ -27,12 +27,34 @@ createApp({
         }
       ],
       msgErr: '',
+      newTask: '',
     }
   },
   mounted(){
 
   },
   methods:{
-
-  }
+    addTask(){
+      this.msgErr = '';
+      if (this.newTask.length < 5) {
+        this.msgErr = 'Il task deve avere almeno 5 caratteri'
+        this.newTask = '';
+      } else {
+        //il metodo unshift aggiunge un elemento in testa all'array
+        this.taskList.unshift({
+          text: this.newTask,
+          done: false
+        });
+        this.newTask = '';
+      }
+    },
+    deleteTask(index){
+      this.msgErr = '';
+      if (this.taskList[index].done) {
+        this.taskList.splice(index, 1)
+      } else {
+        this.msgErr = 'Sbarra la task per rimuoverla'
+      }
+    }
+  }  
 }).mount('#app')

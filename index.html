@@ -18,8 +18,9 @@
       </div>
 
       <div class="input-area">
-        <input type="text" placeholder="task">
-        <button>Add</button>
+        <!-- v-model.trim si usa per rimuovere gli spazi vuoti-->
+        <input @keyup.enter="addTask" type="text" placeholder="task" v-model.trim="newTask">
+        <button @click="addTask">Add</button>
         <p class="error">{{ msgErr }}</p>
       </div>
 
@@ -31,11 +32,11 @@
             class="task">
             <!-- ATTENZIONE: se avessimo inserito @click="task.done = !task.done" in <li> avremmo avuto 2 eventi diversi al click, sia al genitore <li> che al figlio <i>, per evitare questo problema Vue usa il metodo @click.stop che blocca l'eventuale propagazione del click e non va in conflitto col click del genitore(SI, CLICK.STOP VA NEL TAG FIGLIO)-->
             <span @click="task.done = !task.done">{{ task.text }}</span>
-            <!-- dall'array taskList, prendi il task in posizione index e rimuovi 1 elemento con splice-->
-            <i @click="taskList.splice(index, 1)" class="fa-solid fa-trash"></i>
+            <!-- dall'array taskList, prendi il task in posizione index e rimuovi 1 elemento con splice MA NOI DOBBIAMO USARE DELLE CONDIZIONI PER L'ERRORE SE "task.done ? 'done' : ''"-->
+            <i @click="deleteTask(index)" class="fa-solid fa-trash"></i>
           </li>
         </ul>
-        <h3>Hai concluso task da completare 👼</h3>
+        <h3 v-if="taskList.length == 0">Hai concluso task da completare 👼</h3>
       </div>
     </div>
   </div>
