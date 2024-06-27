@@ -14,23 +14,25 @@
   <div id="app">
     <div class="container">
       <div class="logo">
-        <img src="logo.png" alt="">
+        <img :src="logo" alt="">
       </div>
 
       <div class="input-area">
         <input type="text" placeholder="task">
         <button>Add</button>
+        <p class="error">{{ msgErr }}</p>
       </div>
 
       <div class="task-area">
         <ul>
-          <li class="task">
-            <span>Fare la spesa</span>
-            <i class="fa-solid fa-trash"></i>
-          </li>
-          <li class="task done">
-            <span>Fare la spesa</span>
-            <i class="fa-solid fa-trash"></i>
+          <li
+           v-for="(task, index) in taskList"
+           :class="task.done ? 'done' : ''"
+            class="task">
+            <!-- ATTENZIONE: se avessimo inserito @click="task.done = !task.done" in <li> avremmo avuto 2 eventi diversi al click, sia al genitore <li> che al figlio <i>, per evitare questo problema Vue usa il metodo @click.stop che blocca l'eventuale propagazione del click e non va in conflitto col click del genitore(SI, CLICK.STOP VA NEL TAG FIGLIO)-->
+            <span @click="task.done = !task.done">{{ task.text }}</span>
+            <!-- dall'array taskList, prendi il task in posizione index e rimuovi 1 elemento con splice-->
+            <i @click="taskList.splice(index, 1)" class="fa-solid fa-trash"></i>
           </li>
         </ul>
         <h3>Hai concluso task da completare 👼</h3>
