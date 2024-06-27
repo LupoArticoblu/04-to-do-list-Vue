@@ -1,0 +1,59 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container{
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.input-area,
+.logo{
+  text-align: center;
+}
+
+img{
+  width: 300px;
+}
+
+.input-area{
+  padding: 40px 0;
+}
+
+.input-area input{
+  width: 300px;
+  margin-right: 20px;
+}
+
+.input-area input,
+.input-area button{
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.task-area{
+  border-radius: 10px;
+  background-color: #f7f5f7;
+  padding: 40px;
+}  
+
+.task{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+  border-bottom: 1px solid gray;
+}
+
+.task:hover{
+  opacity: 0.8;
+  background-color: aliceblue;
+}
+
+.task.done span{
+  text-decoration: line-through;
+}
