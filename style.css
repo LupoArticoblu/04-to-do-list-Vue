@@ -49,7 +49,6 @@ img{
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  cursor: pointer;
   border-bottom: 1px solid gray;
 }
 
@@ -58,6 +57,35 @@ img{
   background-color: aliceblue;
 }
 
+.task span,
+.task i{
+  cursor: pointer;
+}
 .task.done span{
   text-decoration: line-through;
 }
+
+.badge{
+  background-color: lightblue;
+  padding: 5px 5px;
+  width: 30px;
+  text-align: center;
+  height: auto;
+  border-radius: 50px;
+  color: olive;
+  font-weight: bold;
+}
+
+.btn{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.icons{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+} 

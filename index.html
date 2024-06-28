@@ -32,6 +32,15 @@
             class="task">
             <!-- ATTENZIONE: se avessimo inserito @click="task.done = !task.done" in <li> avremmo avuto 2 eventi diversi al click, sia al genitore <li> che al figlio <i>, per evitare questo problema Vue usa il metodo @click.stop che blocca l'eventuale propagazione del click e non va in conflitto col click del genitore(SI, CLICK.STOP VA NEL TAG FIGLIO)-->
             <span @click="task.done = !task.done">{{ task.text }}</span>
+            <div class="icons">
+              <button class="btn" @click="decrementBadge()" v-if="task.count > 1">-</button>
+              <!-- creiamo un badge che aumenti la quantità della stessa task più volte-->
+              <div class="badge" v-if="task.count > 1">
+                <!-- se task count è maggiore di uno, mostrami il badge-->
+                {{ task.count }}
+              </div>
+              <button class="btn" @click="incrementBadge()" v-if="task.count > 1">+</button>
+            </div>
             <!-- dall'array taskList, prendi il task in posizione index e rimuovi 1 elemento con splice MA NOI DOBBIAMO USARE DELLE CONDIZIONI PER L'ERRORE SE "task.done ? 'done' : ''"-->
             <i @click="deleteTask(index)" class="fa-solid fa-trash"></i>
           </li>

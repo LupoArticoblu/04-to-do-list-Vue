@@ -15,19 +15,23 @@ createApp({
       taskList: [
         {
           text: 'Fare la spesa',
-          done: false
+          done: false,
+          count: 1
         },
         {
           text: 'Pulire la cucina',
-          done: false
+          done: false,
+          count: 1
         },
         {
           text: 'Andare in palestra',
-          done: true
+          done: true,
+          count: 1
         }
       ],
       msgErr: '',
       newTask: '',
+      controlBadge: null
     }
   },
   mounted(){
@@ -40,13 +44,22 @@ createApp({
         this.msgErr = 'Il task deve avere almeno 5 caratteri'
         this.newTask = '';
       } else {
+        //controllo se il task esiste: uso una variabile locale e gli assegno un arrow function che con col metodo find cerca all'interno dell'array un task.text che corrisponda a ciò che abbiamo scritto nell'input
+        this.controlBadge = this.taskList.find(task => task.text === this.newTask);
+        //se lo trova allora incrementa il count di 1
+        if (this.controlBadge) {
+         this.incrementBadge(); 
+        }else{
+        //altrimenti:
         //il metodo unshift aggiunge un elemento in testa all'array
-        this.taskList.unshift({
-          text: this.newTask,
-          done: false
-        });
+          this.taskList.unshift({
+            text: this.newTask,
+            done: false,
+            count: 1
+          });
+        }
         this.newTask = '';
-      }
+      }  
     },
     deleteTask(index){
       this.msgErr = '';
@@ -54,7 +67,17 @@ createApp({
         this.taskList.splice(index, 1)
       } else {
         this.msgErr = 'Sbarra la task per rimuoverla'
+      }        
+    },
+    incrementBadge(){
+      if(this.controlBadge){
+       this.controlBadge.count++
       }
-    }
-  }  
+    },
+    decrementBadge(){
+      if(this.controlBadge&&this.controlBadge.count > 1){
+        this.controlBadge.count--
+      }
+    }  
+  }
 }).mount('#app')
